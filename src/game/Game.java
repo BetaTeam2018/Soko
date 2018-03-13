@@ -15,9 +15,15 @@ public class Game {
 		runing = true;
 		
 		//TODO Gameloop
+		System.out.println("it works");
 	}
 	
 	public void endGame() {
 		runing = false;
 	}
+	
+	public static void main(String[] args) {
+		new Game().startGame();
+	}
+	
 }
