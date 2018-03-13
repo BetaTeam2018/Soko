@@ -23,7 +23,7 @@ public class Game{
 	public void startGame() {
 		runing = true;
 		
-		//TODO Gameloop
+		//TODO Gameloop: menu
 		
 		new EventTest();	
 		
