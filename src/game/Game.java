@@ -6,24 +6,33 @@
 */
 
 package game;
-public class Game {
+import etc.EventTest;
+
+public class Game{
 	
 	private Field field;
 	private boolean runing;
+	
+	
+	public static void main(String[] args) {	
+		new Game().startGame();
+			
+		
+	}
 	
 	public void startGame() {
 		runing = true;
 		
 		//TODO Gameloop
+		
+		new EventTest();	
+		
 		System.out.println("it works");
+		
 	}
 	
 	public void endGame() {
 		runing = false;
-	}
-	
-	public static void main(String[] args) {
-		new Game().startGame();
-	}
+	}	
 	
 }

@@ -11,11 +11,13 @@ public class Box extends Thing {
 	
 	@Override
 	public boolean slideBy(Player pusher, Direction dir) {
-		return false;
+		return super.slideBy(pusher, dir);
 	}
 	
 	@Override
-	public void setNewField(Field f) {
+	public void setNewField(Field newField) {
+		this.getCurrentField().remove(this);
+		newField.set(this);
 	}
 
 }
