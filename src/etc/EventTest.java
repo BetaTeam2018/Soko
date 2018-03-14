@@ -34,7 +34,9 @@ public class EventTest extends JFrame implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {		
 		
-		int keyCode = e.getKeyCode();		
+		label2.setText("KEY PRESSED");
+		int keyCode = e.getKeyCode();	
+		
 			
 		//maybe function reference is a better choice than this massive switch:
 		switch(keyCode) {
@@ -94,9 +96,7 @@ public class EventTest extends JFrame implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {		
-		//if pressed continuously
-		System.out.println("KEY TYPED");
-		label2.setText("KEY TYPED");
+		System.out.println("KEY TYPED");		
 	}
 	
 }
