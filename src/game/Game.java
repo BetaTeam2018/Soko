@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import etc.EventTest;
+import skeleton_menu.Menu;
 
 public class Game implements KeyListener {
 	
@@ -27,8 +28,8 @@ public class Game implements KeyListener {
 		runing = true;
 		
 		//TODO Gameloop: menu
-		
-		new EventTest();	
+		Menu.printMenuList();
+	//	new EventTest();	
 		
 		System.out.println("it works");
 		
