@@ -25,8 +25,11 @@ public abstract class Field {
 		neighbors.put(dir, field);
 	}
 	
-	public Field getNeighbor(Direction dir) {		
-		return neighbors.get(dir);
+	public Field getNeighbor(Direction dir) {	
+		Logger.enter(this, "getNeighbor("+dir+")");
+		Field neighbor = neighbors.get(dir);
+		Logger.exit(this, "getNeighbor("+dir+")", neighbor);
+		return neighbor;
 	}
 	
 	public static void ConnectHorizontal(Field western, Field eastern) {
@@ -42,7 +45,7 @@ public abstract class Field {
 	
 	
 	public boolean pushHereBy(Player pusher, Thing pushed, Direction dir) {		
-	
+		Logger.enter(this, "pushHereBy(...)" );
 		boolean result = false;
 		
 		if(this.getThing() != null) {
@@ -51,7 +54,7 @@ public abstract class Field {
 			pushed.setLastPusher(pusher);			
 			pushed.setNewField(this);
 		}
-		
+		Logger.exit(this, "pushHereBy(...)", result);
 		return result;
 	}
 	

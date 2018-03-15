@@ -21,12 +21,15 @@ public class Logger {
 		logData.put(obj, str);
 	}
 	public static void enter(Object o, String fv) {	
-		System.out.println(getTabs() + "->" + logData.get(o) + "." + fv + ":");
+		System.out.println(getTabs() + "-> " + logData.get(o) + "." + fv + ":");
 		tabNum++;
 	}
-	public static void  exit(Object o, String fv, String ret) {	
-		System.out.println(getTabs() + "<-" + ret + logData.get(o) + "." + fv);
+	public static void  exit(Object o, String fv, Object retObj) {	
 		tabNum--;
+		String retStr = "";
+		if (retObj!=(null)) retStr = "(result = " + logData.get(retObj) + "): ";
+		System.out.println(getTabs() + "<- " + retStr + logData.get(o) + "." + fv);
+	
 	}
 	
 	public static String getTabs() {

@@ -24,7 +24,7 @@ public class Player extends Thing {
 		Field f = this.getCurrentField();
 		Field f2 = f.getNeighbor(dir);		
 		f2.pushHereBy(null, this, dir);
-		Logger.exit(this, "step(" + dir + ")", "");
+		Logger.exit(this, "step(" + dir + ")", null);
 	}
 	
 	@Override
