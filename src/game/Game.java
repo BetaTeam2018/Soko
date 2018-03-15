@@ -6,55 +6,59 @@
 */
 
 package game;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
+import java.util.Scanner;
 
 import etc.EventTest;
 import skeleton_menu.Menu;
+import skeleton_menu.TestWareHouse;
 
-public class Game implements KeyListener {
+public class Game  {
 	
-	private Field field;
-	private boolean runing;
-	
+	private List<Field> fields;
+	private boolean running;
+	private TestWareHouse testWareHouse = new TestWareHouse(this);
 	
 	public static void main(String[] args) {	
 		new Game().startGame();
-			
-		
 	}
 	
 	public void startGame() {
-		runing = true;
+		int menulistNum = -1;
+		running = true;
 		
-		//TODO Gameloop: menu
-		Menu.printMenuList();
-	//	new EventTest();	
+		while (menulistNum!=0) {						// 0. a kilépés
+			Menu.printMenuList();						// A menüpontok kiírása
+			menulistNum = Menu.readListNumber();		// Sorszám beolvasása
 		
-		System.out.println("it works");
+			switch (menulistNum) {
+			case 0: 
+				break;
+			case 1: 
+				System.out.println("1. teszt lefutása...");
+				this.testWareHouse.workerStepsToFloorTest();
+				System.out.println("1. teszt VÉGE \n \n");
+				break;
+			case 2: 
+				// TODO: call test-functions
+				break;
+			// ... case n: break;
+			default: 
+				Menu.notFoundListNumErrorMessage();		// alapértelmezett hibaüzenet dobás, ha nem érvényes sorszámot gépel a felhasználó
+				break;
+			}
+		}
+	// new EventTest();		
+	// System.out.println("it works");
 		
 	}
 	
 	public void endGame() {
-		runing = false;
+		running = false;
 	}
 
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}	
 	
 }

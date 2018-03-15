@@ -6,6 +6,9 @@
 */
 
 package game;
+
+import logger.Logger;
+
 public abstract class Thing {
 	
 	private Player lastPusher;
@@ -17,7 +20,9 @@ public abstract class Thing {
 	}
 	
 	public abstract void setNewField(Field newField);
-	
+	public void setField(Field f) {
+		currentField = f;
+	}
 	public void setLastPusher(Player p) {
 		lastPusher = p;
 	}
@@ -31,6 +36,7 @@ public abstract class Thing {
 	}
 	
 	public Field getCurrentField() {
+		
 		return currentField;
 	}
 }

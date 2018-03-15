@@ -6,13 +6,25 @@
 */
 
 package game;
+
+import logger.Logger;
+
 public class Player extends Thing {
 	
-	Game g;
-	long point;
+	private Game game;
+	private long points;
+	
+	public Player(Game g) {	
+		this.game = g;
+		points = 0;
+	}
 	
 	public void step(Direction dir) {
-		this.getCurrentField().getNeighbor(dir).pushHereBy(null, this, dir);
+		Logger.enter(this, "step(" + dir + ")");
+		Field f = this.getCurrentField();
+		Field f2 = f.getNeighbor(dir);
+		f2.pushHereBy(null, this, dir);
+		Logger.exit(this, "step(" + dir + ")");
 	}
 	
 	@Override
@@ -28,15 +40,15 @@ public class Player extends Thing {
 	@Override
 	public void die() {
 		super.die();
-		g.endGame();
+		game.endGame();
 	}
 	
 	public void addPoints(long p) {
-		point += p;
+		points += p;
 	}
 	
 	public void subtractPoints(long p) {
-		point -= p;
+		points -= p;
 	}
 	
 	@Override

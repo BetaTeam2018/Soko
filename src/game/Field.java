@@ -8,11 +8,14 @@
 package game;
 
 import java.util.Map;
+import java.util.TreeMap;
+
+import logger.Logger;
 
 public abstract class Field {
 	
 	private Thing thing;
-	private Map<Direction, Field> neighbors;
+	private Map<Direction, Field> neighbors = new TreeMap<>();
 	
 	
 	//TODO constructor
@@ -29,7 +32,7 @@ public abstract class Field {
 	
 	
 	public boolean pushHereBy(Player pusher, Thing pushed, Direction dir) {		
-		
+	
 		boolean result = false;
 		
 		if(this.getThing() != null) {
@@ -58,6 +61,7 @@ public abstract class Field {
 			System.err.println("Shit happens"); // TODO exception
 		
 		thing = p; //Bermuda triangle LOL
+		p.setField(this);
 	}
 	
 	public void remove(Player p) {

@@ -6,16 +6,25 @@ import java.util.Map;
 import game.*;
 
 
-class Logger {
-	private static final Map<Object, String> functions;
+public class Logger {
+	private static final Map<Object, String> logData;
 
 	static {
-		functions = new HashMap<Object, String>();
+		logData = new HashMap<Object, String>();
 	}
-
-	static void enter(Object o, String fv, String obj) {	
-	System.out.println("->" + obj + "ret" + fv + "(...)"); }
-	static void  exit(Object o, String fv) {	
-	System.out.println("<-" + "ret" + fv + "(...)"); }
+	/**
+	 * 
+	 * @param o key
+	 * @param s value
+	 */
+	public static void putLogData(Object obj, String str) {
+		logData.put(obj, str);
+	}
+	public static void enter(Object o, String fv) {	
+		System.out.println("->" + logData.get(o) + "." + fv + ":"); 
+	}
+	public static void  exit(Object o, String fv) {	
+		System.out.println("<-"+ logData.get(o) + "." + fv);
+	}
 
 }

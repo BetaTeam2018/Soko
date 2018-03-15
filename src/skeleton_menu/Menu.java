@@ -2,6 +2,7 @@ package skeleton_menu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Menu {
 	private static final List<String> menuList;
@@ -20,6 +21,16 @@ public class Menu {
 		for (String item : menuList) {
 			System.out.println(i++ + ". " + item);
 		}
-		System.out.println("------------------------------------------------- \n \n");
+		System.out.println("------------------------------------------------- \n");
+	}
+	
+	public static int readListNumber() {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Sorszám: ");
+		return sc.nextInt();
+	}
+	
+	public static void notFoundListNumErrorMessage() {
+		System.out.println("Error: Érvénytelen sorszám! \n");
 	}
 }
