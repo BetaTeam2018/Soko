@@ -13,9 +13,17 @@ public class Menu {
 		menuList.add("A játékos célhelyre lépjen");
 		menuList.add("A játékos kapcsolómezõre lépjen!");
 		menuList.add("A játékos menjen neki a falnak!");
-		// TODO: add more list items
+		menuList.add("?");
 		
-		menuList.add("A játékos egy ládát tol");
+		//@Ferenc9 begin
+		menuList.add("A játékos egy ládát tol"); // number 7
+		menuList.add("A játékos játékost tol.");
+		menuList.add("A ládák a padlón tolódnak."); // Eredeti: A láda padlóra tolódik
+		menuList.add("A láda lyukra tolódik.");
+		menuList.add("A játékos egy ládát tol"); // number 11
+		//Ferenc9 end
+		
+		// TODO: add more list items
 	}
 	public static void printMenuList() {
 		int i = 1;

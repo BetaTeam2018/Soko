@@ -10,7 +10,9 @@ public class TrapDoor extends Floor {
 	
 	private boolean opened;
 	
-	//TODO constructor
+	public TrapDoor() {
+		opened = false;
+	}
 	
 	public void set(Box b) {
 		if(opened) {

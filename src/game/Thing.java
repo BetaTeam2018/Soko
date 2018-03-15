@@ -16,7 +16,9 @@ public abstract class Thing {
 	
 	
 	public boolean slideBy(Player pusher, Direction dir) {		
-		return this.getCurrentField().getNeighbor(dir).pushHereBy(pusher, this, dir);
+		return this.getCurrentField().
+				getNeighbor(dir).
+				pushHereBy(pusher, this, dir);
 	}
 	
 	public abstract void setNewField(Field newField);

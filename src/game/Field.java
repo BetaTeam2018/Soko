@@ -62,7 +62,7 @@ public abstract class Field {
 		if(thing != null)
 			System.err.println("Shit happens"); // TODO exception
 		
-		thing = b; //Bermuda triangle LOL
+		thing = b; //Bermuda triangle LOL		
 	}
 	
 	public void remove(Box b) {
@@ -73,8 +73,7 @@ public abstract class Field {
 		if(thing != null)
 			System.err.println("Shit happens"); // TODO exception
 		
-		thing = p; //Bermuda triangle LOL
-		p.setField(this);
+		thing = p; //Bermuda triangle LOL		
 	}
 	
 	public void remove(Player p) {

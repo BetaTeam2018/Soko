@@ -43,11 +43,23 @@ public class Game  {
 			case 2: 
 				// TODO: call test-functions
 				break;
-			// ... case n: break;
-			case 7:
-				System.out.println("1st test is running...");
+			
+			//Ferenc9 begin	
+			case 7:				
 				this.testWareHouse.playerPushesBox();
-				break;				
+				break;
+			case 8:
+				this.testWareHouse.playerPushesPlayer();
+				break;
+			case 9:
+				this.testWareHouse.boxStepsToFloor();
+				break;
+			case 10:
+				this.testWareHouse.boxStepsToHole();
+				break;
+			case 11: this.testWareHouse.boxStepsToTrapdoor();
+				break;
+			//Ferenc9 end
 				
 			default: 
 				Menu.notFoundListNumErrorMessage();		
