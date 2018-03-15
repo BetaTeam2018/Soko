@@ -30,24 +30,26 @@ public class Game  {
 		int menulistNum = -1;
 		running = true;
 		
-		while (menulistNum!=0) {						// 0. a kilépés
-			Menu.printMenuList();						// A menüpontok kiírása
-			menulistNum = Menu.readListNumber();		// Sorszám beolvasása
+
+		while (menulistNum!=0) {						// 0. a kilï¿½pï¿½s
+			Menu.printMenuList();						// A menï¿½pontok kiï¿½rï¿½sa
+			menulistNum = Menu.readListNumber();		// Sorszï¿½m beolvasï¿½sa
+
 		
 			switch (menulistNum) {
 			case 0: 
 				break;
 			case 1: 
-				System.out.println("1. teszt lefutása...");
+				System.out.println("1. teszt lefutï¿½sa...");
 				this.testWareHouse.workerStepsToFloorTest();
-				System.out.println("1. teszt VÉGE \n \n");
+				System.out.println("1. teszt Vï¿½GE \n \n");
 				break;
 			case 2: 
 				// TODO: call test-functions
 				break;
 			// ... case n: break;
 			default: 
-				Menu.notFoundListNumErrorMessage();		// alapértelmezett hibaüzenet dobás, ha nem érvényes sorszámot gépel a felhasználó
+				Menu.notFoundListNumErrorMessage();		// alapï¿½rtelmezett hibaï¿½zenet dobï¿½s, ha nem ï¿½rvï¿½nyes sorszï¿½mot gï¿½pel a felhasznï¿½lï¿½
 				break;
 			}
 		}
