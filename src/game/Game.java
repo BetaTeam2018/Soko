@@ -31,18 +31,18 @@ public class Game  {
 		running = true;
 		
 
-		while (menulistNum!=0) {						// 0. a kil�p�s
-			Menu.printMenuList();						// A men�pontok ki�r�sa
-			menulistNum = Menu.readListNumber();		// Sorsz�m beolvas�sa
+		while (menulistNum!=0) {						
+			Menu.printMenuList();						
+			menulistNum = Menu.readListNumber();		
 
 		
 			switch (menulistNum) {
 			case 0: 
 				break;
 			case 1: 
-				System.out.println("1. teszt lefut�sa...");
+				System.out.println("1st test is running...");
 				this.testWareHouse.workerStepsToFloorTest();
-				System.out.println("1. teszt V�GE \n \n");
+				System.out.println("1st test end \n \n");
 				break;
 			case 2: 
 				// TODO: call test-functions
