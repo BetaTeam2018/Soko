@@ -6,33 +6,61 @@
 */
 
 package game;
-import etc.EventTest;
 
-public class Game{
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.List;
+import java.util.Scanner;
+
+import etc.EventTest;
+import skeleton_menu.Menu;
+import skeleton_menu.TestWareHouse;
+
+public class Game  {
 	
-	private Field field;
-	private boolean runing;
-	
+	private List<Field> fields;
+	private boolean running;
+	private TestWareHouse testWareHouse = new TestWareHouse(this);
 	
 	public static void main(String[] args) {	
 		new Game().startGame();
-			
-		
 	}
 	
 	public void startGame() {
-		runing = true;
+		int menulistNum = -1;
+		running = true;
 		
-		//TODO
+
+		while (menulistNum!=0) {						// 0. a kil�p�s
+			Menu.printMenuList();						// A men�pontok ki�r�sa
+			menulistNum = Menu.readListNumber();		// Sorsz�m beolvas�sa
+
 		
-		new EventTest();	
-		
-		System.out.println("it works");
+			switch (menulistNum) {
+			case 0: 
+				break;
+			case 1: 
+				System.out.println("1. teszt lefut�sa...");
+				this.testWareHouse.workerStepsToFloorTest();
+				System.out.println("1. teszt V�GE \n \n");
+				break;
+			case 2: 
+				// TODO: call test-functions
+				break;
+			// ... case n: break;
+			default: 
+				Menu.notFoundListNumErrorMessage();		// alap�rtelmezett hiba�zenet dob�s, ha nem �rv�nyes sorsz�mot g�pel a felhaszn�l�
+				break;
+			}
+		}
+	// new EventTest();		
+	// System.out.println("it works");
 		
 	}
 	
 	public void endGame() {
-		runing = false;
-	}	
+		running = false;
+	}
+
 	
 }
