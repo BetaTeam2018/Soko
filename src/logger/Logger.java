@@ -24,8 +24,8 @@ public class Logger {
 		System.out.println(getTabs() + "->" + logData.get(o) + "." + fv + ":");
 		tabNum++;
 	}
-	public static void  exit(Object o, String fv) {	
-		System.out.println(getTabs() + "<-"+ logData.get(o) + "." + fv);
+	public static void  exit(Object o, String fv, String ret) {	
+		System.out.println(getTabs() + "<-" + ret + logData.get(o) + "." + fv);
 		tabNum--;
 	}
 	
