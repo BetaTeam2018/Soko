@@ -14,6 +14,8 @@ public class Menu {
 		menuList.add("A játékos kapcsolómezõre lépjen!");
 		menuList.add("A játékos menjen neki a falnak!");
 		// TODO: add more list items
+		
+		menuList.add("A játékos egy ládát tol");
 	}
 	public static void printMenuList() {
 		int i = 1;
@@ -33,4 +35,5 @@ public class Menu {
 	public static void notFoundListNumErrorMessage() {
 		System.out.println("Error: Érvénytelen sorszám! \n");
 	}
+	
 }

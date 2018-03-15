@@ -29,6 +29,16 @@ public abstract class Field {
 		return neighbors.get(dir);
 	}
 	
+	public static void ConnectHorizontal(Field western, Field eastern) {
+		western.setNeighbor(Direction.RIGHT, eastern);
+		eastern.setNeighbor(Direction.LEFT, western);
+	}
+	
+	public static void ConnectVertical(Field northern, Field southern) {
+		northern.setNeighbor(Direction.DOWN, southern);
+		southern.setNeighbor(Direction.UP, northern);
+	}
+	
 	
 	
 	public boolean pushHereBy(Player pusher, Thing pushed, Direction dir) {		
@@ -37,8 +47,8 @@ public abstract class Field {
 		
 		if(this.getThing() != null) {
 			 result = this.getThing().slideBy(pusher, dir);
-		}else if(result == true) {
-			pushed.setLastPusher(pusher);
+		}else if(result == true) {			
+			pushed.setLastPusher(pusher);			
 			pushed.setNewField(this);
 		}
 		

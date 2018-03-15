@@ -7,12 +7,8 @@
 
 package game;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.List;
-import java.util.Scanner;
 
-import etc.EventTest;
+import java.util.List;
 import skeleton_menu.Menu;
 import skeleton_menu.TestWareHouse;
 
@@ -48,6 +44,11 @@ public class Game  {
 				// TODO: call test-functions
 				break;
 			// ... case n: break;
+			case 7:
+				System.out.println("1st test is running...");
+				this.testWareHouse.playerPushesBox();
+				break;				
+				
 			default: 
 				Menu.notFoundListNumErrorMessage();		
 				break;

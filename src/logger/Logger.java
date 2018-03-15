@@ -29,7 +29,7 @@ public class Logger {
 		tabNum--;
 	}
 	
-	private static String getTabs() {
+	public static String getTabs() {
 		String tabs = "";
 		for (int i = 1; i<=tabNum; i++) {
 			tabs = tabs.concat("\t");
