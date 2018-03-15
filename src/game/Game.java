@@ -49,7 +49,7 @@ public class Game  {
 				break;
 			// ... case n: break;
 			default: 
-				Menu.notFoundListNumErrorMessage();		// alap�rtelmezett hiba�zenet dob�s, ha nem �rv�nyes sorsz�mot g�pel a felhaszn�l�
+				Menu.notFoundListNumErrorMessage();		
 				break;
 			}
 		}
