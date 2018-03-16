@@ -18,6 +18,7 @@ public class Logger {
 	
 	static {
 		logData = new HashMap<Object, String>();
+		putLogData(Direction.RIGHT, "dir");
 	}
 	
 	
@@ -43,7 +44,7 @@ public class Logger {
 	 * @param params objektumok tömbje, amiben a objektumreferenciák vannak.
 	 * @return Az elõállított paraméterlista sztring formátumban.
 	 */
-	public static String objParamListString(Object[] params) {
+	public static String objParamListToString(Object[] params) {
 		String strParams = "";
 		int i = 0;
 		for (Object key : params) {
@@ -54,18 +55,41 @@ public class Logger {
 		return strParams;
 	}
 	
-	public static void enter(Object o, String fv) {	
-		System.out.println(getTabs() + "-> " + logData.get(o) + "." + fv + ":");
+	
+	/**
+	 * Naplózó (belépéskor) // Log format: -> [obj: ClassName].functionsName([param1], [param2], ...)
+	 * 
+	 * @param o annak az objektum referenciája, ahonnan a hívás származik
+	 * @param fv függvény neve
+	 * @param params függvénye paramétereit tartalmazó tömb
+	 * 
+	 */
+	public static void enter(Object o, String fv, Object[] params) {
+		
+		String strParams = objParamListToString(params);
+		
+		System.out.println(getTabs() + "-> " + logData.get(o) + "." + fv + "(" + strParams + ")" + ":");
 		tabNum++;
 	}
-	public static void  exit(Object o, String fv, Object retObj) {	
+	/**
+	 * Naplózó (visszatéréskor) // Log format: <- (result = retStr): [obj: ClassName].functionsName([param1], [param2], ...)
+	 * @param o annak az objektum referenciája, ahonnan a hívás származik
+	 * @param fv függvény neve
+	 * @param params függvénye paramétereit tartalmazó tömb
+	 * @param retStr visszatérési érték String formátumban
+	 */
+	public static void  exit(Object o, String fv, Object[] params, String retStr) {	
 		tabNum--;
-		String retStr = "";
-		if (retObj!=(null)) retStr = "(result = " + logData.get(retObj) + "): ";
-		System.out.println(getTabs() + "<- " + retStr + logData.get(o) + "." + fv);
+		if (retStr!="") retStr = "(result = " + retStr + "): ";	
+		String strParams = objParamListToString(params);
+		System.out.println(getTabs() + "<- " + retStr + logData.get(o) + "." + fv + "(" + strParams + ")");
 	
 	}
 	
+	/**
+	 * Tabokat tartalmazó sztringet készít, ami a bekezdések formázására szolgál. 
+	 * @return Valamennyi mennyiségû tabulátorokból álló sztring.
+	 */
 	public static String getTabs() {
 		String tabs = "";
 		for (int i = 1; i<=tabNum; i++) {

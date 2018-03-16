@@ -25,10 +25,11 @@ public abstract class Field {
 		neighbors.put(dir, field);
 	}
 	
-	public Field getNeighbor(Direction dir) {	
-		Logger.enter(this, "getNeighbor("+dir+")");
+	public Field getNeighbor(Direction dir) {
+		Object[] params = {dir};
+		Logger.enter(this, "getNeighbor", params);
 		Field neighbor = neighbors.get(dir);
-		Logger.exit(this, "getNeighbor("+dir+")", neighbor);
+		Logger.exit(this, "getNeighbor", params, Logger.getLogDataString(neighbor));
 		return neighbor;
 	}
 	
@@ -45,7 +46,8 @@ public abstract class Field {
 	
 	
 	public boolean pushHereBy(Player pusher, Thing pushed, Direction dir) {		
-		Logger.enter(this, "pushHereBy(...)" );
+		Object[] params = {pusher, pushed, dir};
+		Logger.enter(this, "pushHereBy", params);
 		boolean result = true;
 		
 		if(this.getThing() != null) {
@@ -54,7 +56,7 @@ public abstract class Field {
 			pushed.setLastPusher(pusher);			
 			pushed.setNewField(this);
 		}
-		Logger.exit(this, "pushHereBy(...)", result);
+		Logger.exit(this, "pushHereBy", params, new Boolean(result).toString());
 		return result;
 	}
 	
