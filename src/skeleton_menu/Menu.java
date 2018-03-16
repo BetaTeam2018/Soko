@@ -22,6 +22,9 @@ public class Menu {
 		menuList.add("A láda lyukra tolódik.");
 		menuList.add("A játékos egy ládát tol"); // number 11
 		//Ferenc9 end
+		//@csiki100 begin
+		menuList.add("A láda célhelyre kerül");
+		menuList.add("A láda kapcsolóra kerül");
 		
 		// TODO: add more list items
 	}

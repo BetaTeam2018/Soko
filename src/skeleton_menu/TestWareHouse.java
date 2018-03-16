@@ -204,4 +204,68 @@ public class TestWareHouse {
 	}
 //@Ferenc9 end
 	
+//@csiki100 begin
+	//Test case 12
+	public void BoxStepsToStorageArea()
+	{
+		Field f1=new Floor();
+		Field f2=new Floor();
+		Field f3=new StoreageArea();
+		
+		Logger.putLogData(f1, "[f1: Floor]");
+		Logger.putLogData(f2, "[f2: Floor]");
+		Logger.putLogData(f3, "[f3: StorageArea");
+		
+		
+		Field.ConnectHorizontal(f1, f2);
+		Field.ConnectHorizontal(f2, f3);
+		
+		Player p1=new Player(game);
+		Box b1=new Box();
+		
+		Logger.putLogData(p1, "[p1: Player]");
+		Logger.putLogData(b1, "[b1: Box]");
+		
+		p1.setField(f1);
+		f1.set(p1);
+		
+		b1.setField(f2);
+		f2.set(b1);
+		
+		p1.step(Direction.RIGHT);
+	}
+	//Test case 13
+	public void BoxStepsToSwitch()
+	{
+		Field f1=new Floor();
+		Field f2=new Floor();
+		Field f3=new TrapDoor();
+		Field f4=new Switch((TrapDoor) f3);
+		
+		Logger.putLogData(f1, "[f1: Floor]");
+		Logger.putLogData(f2, "[f2: Floor]");
+		Logger.putLogData(f3, "[f3: TrapDoor]");
+		Logger.putLogData(f4, "[f4: Switch]");
+		
+		Player p1=new Player(game);
+		Box b1=new Box();
+		
+		Logger.putLogData(b1, "[b1: Box]");
+		Logger.putLogData(p1, "[p1: Player]");
+		
+		f1.set(p1);
+		p1.setField(f1);
+		
+		f2.set(b1);
+		b1.setField(f2);
+		
+		Field.ConnectHorizontal(f1, f2);
+		Field.ConnectHorizontal(f2, f4);
+		Field.ConnectHorizontal(f4, f3);
+		
+		p1.step(Direction.RIGHT);
+	/*	Switch sw=(Switch) f4;
+		System.out.println(sw.getTd().getState());*/
+	}
+	//Test case 14
 }

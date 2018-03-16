@@ -60,7 +60,11 @@ public class Game  {
 			case 11: this.testWareHouse.boxStepsToTrapdoor();
 				break;
 			//Ferenc9 end
-				
+			//csiki100 begin
+			case 12: this.testWareHouse.BoxStepsToStorageArea();
+				break;
+			case 13: this.testWareHouse.BoxStepsToSwitch();
+				break;
 			default: 
 				Menu.notFoundListNumErrorMessage();		
 				break;
