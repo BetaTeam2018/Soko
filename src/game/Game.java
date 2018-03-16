@@ -61,9 +61,13 @@ public class Game  {
 				break;
 			//Ferenc9 end
 			//csiki100 begin
-			case 12: this.testWareHouse.BoxStepsToStorageArea();
+			case 12: this.testWareHouse.boxStepsToStorageArea();
 				break;
-			case 13: this.testWareHouse.BoxStepsToSwitch();
+			case 13: this.testWareHouse.boxStepsToSwitch();
+				break;
+			case 14: this.testWareHouse.boxStepsToWall();
+				break;
+			case 15: this.testWareHouse.boxStepstoPlayer();
 				break;
 			default: 
 				Menu.notFoundListNumErrorMessage();		

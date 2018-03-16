@@ -24,15 +24,17 @@ public class Switch extends Floor {
 	}
 	@Override
 	public void set(Box b) {
-		Logger.enter(this, "set("+b+" )");
+		Logger.enter(this, "set(...)");
 		super.set(b);
 		td.open();
-		Logger.exit(this, "set("+b+" )", null);
+		Logger.exit(this, "set(...)", null);
 	}
 	
 	@Override
 	public void remove(Box b) {
+		Logger.enter(this, "remove(...)");
 		super.remove(b);
 		td.close();
+		Logger.exit(this, "remove(...)", null);
 	}
 }

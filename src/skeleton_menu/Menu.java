@@ -25,6 +25,8 @@ public class Menu {
 		//@csiki100 begin
 		menuList.add("A láda célhelyre kerül");
 		menuList.add("A láda kapcsolóra kerül");
+		menuList.add("A láda falnak tolódik");
+		menuList.add("a láda játékost tol");
 		
 		// TODO: add more list items
 	}

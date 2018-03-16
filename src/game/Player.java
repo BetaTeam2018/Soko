@@ -29,18 +29,23 @@ public class Player extends Thing {
 	
 	@Override
 	public boolean slideBy(Player pusher, Direction dir) {
+		Logger.enter(this, "slideBy(...)" );
 		boolean pushable = super.slideBy(pusher, dir);
 		
 		if(pushable == false) {
 			this.die();
-		}		
+		}
+		Logger.exit(this, "slideBy(...)", true);
 		return true;
 	}
 	
 	@Override
 	public void die() {
+		Logger.enter(this, "die()" );
+		this.getCurrentField().set((Player)null);
 		super.die();
 		game.endGame();
+		Logger.exit(this, "die()", null);
 	}
 	
 	public void addPoints(long p) {
@@ -53,7 +58,9 @@ public class Player extends Thing {
 	
 	@Override
 	public void setNewField(Field newField) {
+		Logger.enter(this, "setNewField(...)" );
 		this.getCurrentField().remove(this);
 		newField.set(this);
+		Logger.exit(this, "setNewField(...)", null);
 	}
 }

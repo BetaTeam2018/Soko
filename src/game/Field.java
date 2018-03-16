@@ -46,7 +46,7 @@ public abstract class Field {
 	
 	public boolean pushHereBy(Player pusher, Thing pushed, Direction dir) {		
 		Logger.enter(this, "pushHereBy(...)" );
-		boolean result = false;
+		boolean result = true;
 		
 		if(this.getThing() != null) {
 			 result = this.getThing().slideBy(pusher, dir);

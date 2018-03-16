@@ -19,5 +19,11 @@ public class Box extends Thing {
 		this.getCurrentField().remove(this);
 		newField.set(this);
 	}
+	@Override
+	public void die()
+	{
+		this.getCurrentField().set((Box)null);
+		super.die();
+	}
 
 }

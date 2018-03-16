@@ -206,7 +206,7 @@ public class TestWareHouse {
 	
 //@csiki100 begin
 	//Test case 12
-	public void BoxStepsToStorageArea()
+	public void boxStepsToStorageArea()
 	{
 		Field f1=new Floor();
 		Field f2=new Floor();
@@ -235,7 +235,7 @@ public class TestWareHouse {
 		p1.step(Direction.RIGHT);
 	}
 	//Test case 13
-	public void BoxStepsToSwitch()
+	public void boxStepsToSwitch()
 	{
 		Field f1=new Floor();
 		Field f2=new Floor();
@@ -264,8 +264,93 @@ public class TestWareHouse {
 		Field.ConnectHorizontal(f4, f3);
 		
 		p1.step(Direction.RIGHT);
-	/*	Switch sw=(Switch) f4;
-		System.out.println(sw.getTd().getState());*/
+		Switch sw=(Switch) f4;
+		System.out.println(sw.getTd().getState());
 	}
 	//Test case 14
+	public void boxStepsToWall()
+	{
+		Field f1=new Floor();
+		Field f2=new Floor();
+		Field f3=new Wall();
+		
+		Logger.putLogData(f1, "[f1: Floor]");
+		Logger.putLogData(f2, "[f2: Floor]");
+		Logger.putLogData(f3, "[f3: Wall]");
+		
+		Floor.ConnectHorizontal(f1, f2);
+		Floor.ConnectHorizontal(f2, f3);
+		
+		Player p1=new Player(game);
+		Box b1=new Box();
+		
+		Logger.putLogData(p1, "[p1: Player]");
+		Logger.putLogData(b1, "[b1: Box]");
+		
+		p1.setField(f1);
+		f1.set(p1);
+		
+		b1.setField(f2);
+		f2.set(b1);
+		
+		p1.step(Direction.RIGHT);
+		
+		
+		
+	}
+	//Test case 16
+	public void boxStepstoPlayer()
+	{
+		Field f1=new Floor();
+		Field f2=new Floor();
+		Field f3=new Floor();
+		Field f4=null;
+		
+		Logger.putLogData(f1, "[f1: Floor]");
+		Logger.putLogData(f2, "[f2: Floor]");
+		Logger.putLogData(f3, "[f3: Floor]");
+		
+		System.out.println("Tolható a játékos? (I/N)");			
+		Scanner sc = new Scanner(System.in);
+		String res = sc.nextLine();
+		
+		boolean fail = false;
+		do {			
+			if(res.equals("I"))
+				{
+					f4 = new Floor();
+					Logger.putLogData(f4, "[f4: Floor]");
+				}
+			else if(res.equals("N"))
+				{
+					f4 = new Wall();
+					Logger.putLogData(f4, "[f4: Wall]");
+				}
+			}
+		while(fail);
+		
+		Floor.ConnectHorizontal(f1, f2);
+		Floor.ConnectHorizontal(f2, f3);
+		Floor.ConnectHorizontal(f3, f4);
+		
+		Player p1=new Player(game);
+		Player p2=new Player(game);
+		Box b1=new Box();
+		
+		Logger.putLogData(p1, "[p1: Player]");
+		Logger.putLogData(p2, "[p2: Player]");
+		Logger.putLogData(b1, "[b1: Box]");
+		
+		p1.setField(f1);
+		f1.set(p1);
+		
+		b1.setField(f2);
+		f2.set(b1);
+		
+		p2.setField(f3);
+		f3.set(p2);
+		
+		p1.step(Direction.RIGHT);
+		
+	}
 }
