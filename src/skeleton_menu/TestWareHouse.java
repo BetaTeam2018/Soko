@@ -81,20 +81,20 @@ public class TestWareHouse {
 		Logger.putLogData(f2, "[f2: Floor]");
 		
 	
-		boolean fail = true;
+		boolean fail = false;
 		do {			
 			System.out.println("Tolható a játékos? (I/N)");			
 			Scanner sc = new Scanner(System.in);
 			String res = sc.nextLine();
 			
-			if(res == "I") {
+			if(res.equals("I")) {
 				f3 = new Floor();
 				Logger.putLogData(f3, "[f3: Floor]");
-			}else if( res == "N"){
+			}else if(res.equals("N")){
 				f3 = new Wall();
 				Logger.putLogData(f3, "[f3: Wall]");
 			}else {
-				fail = false;
+				fail = true;
 			}
 		}while(fail);
 		
@@ -115,14 +115,34 @@ public class TestWareHouse {
 	}
 	//Test case 9.
 	public void boxStepsToFloor() {
-		System.out.println("Ha Wenn diagrammal ábrázolnánk, akkkor ez itt a 8. teszt belsejében lenne.");
+			
+		Field f1 = new Floor(), f2 = new Floor(), f3 = new Floor(), f4  = new Floor();	
 		
-		Field f1 = new Floor(), f2 = new Floor(), f3 = new Floor(), f4 = new Floor();		
 		
 		Logger.putLogData(f1, "[f1: Floor]");
 		Logger.putLogData(f2, "[f2: Floor]");				
-		Logger.putLogData(f3, "[f3: Floor]");				
-		Logger.putLogData(f4, "[f4: Floor]");
+		Logger.putLogData(f3, "[f3: Floor]");
+		
+		boolean fail = false;
+		do {			
+			System.out.println("Tolható-e a sor? (I/N)");			
+			Scanner sc = new Scanner(System.in);
+			String res = sc.nextLine();
+			
+			if(res.equals("I")) {
+				f4 = new Floor();
+				Logger.putLogData(f4, "[f4: Floor]");
+			}else if(res.equals("N")){
+				f4 = new Wall();
+				Logger.putLogData(f4, "[f4: Wall]");
+			}else {
+				fail = true;
+			}
+		}while(fail);
+		
+		
+		
+		
 				
 		Field.ConnectHorizontal(f1, f2);
 		Field.ConnectHorizontal(f2, f3);
