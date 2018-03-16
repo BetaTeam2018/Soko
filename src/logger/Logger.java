@@ -18,7 +18,7 @@ public class Logger {
 	
 	static {
 		logData = new HashMap<Object, String>();
-		putLogData(Direction.RIGHT, "dir");
+		putLogData(Direction.RIGHT, "dir");		// alapértelmezett irány a jobbra. 
 	}
 	
 	
