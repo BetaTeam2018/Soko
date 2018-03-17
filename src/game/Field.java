@@ -54,7 +54,6 @@ public abstract class Field {
 			pushed.setLastPusher(pusher);			
 			pushed.setNewField(this);
 		}
-		Logger.exit(this, "pushHereBy(...)", result);
 		return result;
 	}
 	
