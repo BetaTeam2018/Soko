@@ -69,6 +69,11 @@ public class Game  {
 				break;
 			case 15: this.testWareHouse.boxStepstoPlayer();
 				break;
+			case 16: this.testWareHouse.boxStepsFromSwitch();
+				break;
+			case 17: this.testWareHouse.boxStepsFromStorageArea();
+				break;
+			//csiki100 end
 			default: 
 				Menu.notFoundListNumErrorMessage();		
 				break;

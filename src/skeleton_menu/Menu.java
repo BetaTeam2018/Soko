@@ -30,8 +30,10 @@ public class Menu {
 		menuList.add("A láda célhelyre kerül");
 		menuList.add("A láda kapcsolóra kerül");
 		menuList.add("A láda falnak tolódik");
-		menuList.add("a láda játékost tol");
-		
+		menuList.add("A láda játékost tol");
+		menuList.add("A láda letolódik a kapcsolóról");
+		menuList.add("A láda letolódik a célhelyrol");
+		//csiki100 end
 		// TODO: add more list items
 	}
 	public static void printMenuList() {

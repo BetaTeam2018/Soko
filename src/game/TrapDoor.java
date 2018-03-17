@@ -6,6 +6,9 @@
 */
 
 package game;
+
+import logger.Logger;
+
 public class TrapDoor extends Floor {
 	
 	private boolean opened;
@@ -31,11 +34,17 @@ public class TrapDoor extends Floor {
 	}
 	
 	public void open() {
+		Object[] params = {};
+		Logger.enter(this, "open",params);
 		opened = true;
+		Logger.exit(this, "open", null, "");
 	}
 	
 	public void close() {
+		Object[] params = {null};
+		Logger.enter(this, "close",params);
 		opened = false;
+		Logger.exit(this, "close", null, "");
 	}
 	
 	public boolean getState() {

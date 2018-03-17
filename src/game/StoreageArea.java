@@ -11,6 +11,12 @@ public class StoreageArea extends Floor {
 	
 	long pointValue;
 	
+	public StoreageArea()
+	{
+		super();
+		pointValue=0;
+	}
+	
 	public void set(Box b) {
 		super.set(b);
 		b.getLastPusher().addPoints(pointValue);
