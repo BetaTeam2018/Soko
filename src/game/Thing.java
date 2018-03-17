@@ -38,8 +38,9 @@ public abstract class Thing {
 	}
 	
 	public Field getCurrentField() {
-		Logger.enter(this, "getCurrentField");
-		Logger.exit(this, "getCurrentField", currentField);
+		Object[] params = {};
+		Logger.enter(this, "getCurrentField", params);
+		Logger.exit(this, "getCurrentField", params, Logger.getLogDataString(currentField));
 		return currentField;
 	}
 }

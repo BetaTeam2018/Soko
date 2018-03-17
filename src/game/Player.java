@@ -20,32 +20,35 @@ public class Player extends Thing {
 	}
 	
 	public void step(Direction dir) {
-		Logger.enter(this, "step(" + dir + ")");
+		Object[] params = {dir};
+		Logger.enter(this, "step", params);
 		Field f = this.getCurrentField();
 		Field f2 = f.getNeighbor(dir);		
 		f2.pushHereBy(null, this, dir);
-		Logger.exit(this, "step(" + dir + ")", null);
+		Logger.exit(this, "step", params, "");
 	}
 	
 	@Override
 	public boolean slideBy(Player pusher, Direction dir) {
-		Logger.enter(this, "slideBy(...)" );
+		Object[] params = {pusher, dir};
+		Logger.enter(this, "slideBy", params);
 		boolean pushable = super.slideBy(pusher, dir);
 		
 		if(pushable == false) {
 			this.die();
 		}
-		Logger.exit(this, "slideBy(...)", true);
+		Logger.exit(this, "slideBy", params, new Boolean(true).toString());
 		return true;
 	}
 	
 	@Override
 	public void die() {
-		Logger.enter(this, "die()" );
+		Object[] params = {};
+		Logger.enter(this, "die", params);
 		this.getCurrentField().set((Player)null);
 		super.die();
 		game.endGame();
-		Logger.exit(this, "die()", null);
+		Logger.exit(this, "die", params, "");
 	}
 	
 	public void addPoints(long p) {
@@ -58,9 +61,10 @@ public class Player extends Thing {
 	
 	@Override
 	public void setNewField(Field newField) {
-		Logger.enter(this, "setNewField(...)" );
+		Object[] params = {newField};
+		Logger.enter(this, "setNewField",  params);
 		this.getCurrentField().remove(this);
 		newField.set(this);
-		Logger.exit(this, "setNewField(...)", null);
+		Logger.exit(this, "setNewField", params, "");
 	}
 }

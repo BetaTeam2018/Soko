@@ -73,6 +73,8 @@ public class Game  {
 				Menu.notFoundListNumErrorMessage();		
 				break;
 			}
+			                  
+			System.out.println("=================================================\n");
 		}
 	// new EventTest();		
 	// System.out.println("it works");

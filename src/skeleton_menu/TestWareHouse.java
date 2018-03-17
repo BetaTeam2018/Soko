@@ -21,10 +21,11 @@ public class TestWareHouse {
 		Logger.putLogData(p, "[p: Player]");
 		Logger.putLogData(f1, "[f1: Floor]");
 		Logger.putLogData(f2, "[f2: Floor]");
-		
+	//	Logger.putLogData(Direction.RIGHT, "dir");
 		f1.setNeighbor(Direction.RIGHT, f2);
 		f2.setNeighbor(Direction.LEFT, f1);
 		f1.set(p);
+		p.setField(f1);
 		
 		p.step(Direction.RIGHT);
 				

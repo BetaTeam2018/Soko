@@ -7,13 +7,17 @@ import java.util.Scanner;
 public class Menu {
 	private static final List<String> menuList;
 	static {
+		
+		// @kristofgyori begin
 		menuList = new ArrayList<String>();
+		menuList.add("Kilépés a Szkeletonból");
 		menuList.add("A játékos üres mezõre lépjen!");
+		menuList.add("A játékos lyukra lépjen!");
 		menuList.add("A játékos csapóajtóra lépjen!");
 		menuList.add("A játékos célhelyre lépjen");
 		menuList.add("A játékos kapcsolómezõre lépjen!");
 		menuList.add("A játékos menjen neki a falnak!");
-		menuList.add("?");
+		// @ kristofgyori end
 		
 		//@Ferenc9 begin
 		menuList.add("A játékos egy ládát tol"); // number 7
@@ -31,12 +35,12 @@ public class Menu {
 		// TODO: add more list items
 	}
 	public static void printMenuList() {
-		int i = 1;
+		int i = 0;
 		System.out.println("Írja be a tesztelni kívánt teszteset sorszámát! \n");
 		for (String item : menuList) {
 			System.out.println(i++ + ". " + item);
 		}
-		System.out.println("------------------------------------------------- \n");
+		System.out.println("=================================================\n");
 	}
 	
 	public static int readListNumber() {
