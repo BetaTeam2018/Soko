@@ -359,7 +359,7 @@ public class TestWareHouse {
 	public void boxStepsFromSwitch()
 
 	{
-		Field f1=new Floor();
+		/*Field f1=new Floor();
 		Field f2=new TrapDoor();
 		Field f3=new Switch((TrapDoor)f2);
 		Field f4=new Floor();
@@ -384,13 +384,13 @@ public class TestWareHouse {
 		f3.set(b1);
 		b1.setField(f3);
 		
-		p1.step(Direction.RIGHT);
+		p1.step(Direction.RIGHT);*/
 		
 	}
 	//Test case 18
 	public void boxStepsFromStorageArea()
 	{
-		Field f1=new Floor();
+		/*Field f1=new Floor();
 		Field f2=new StoreageArea();
 		Field f3=new Floor();
 		
@@ -417,6 +417,6 @@ public class TestWareHouse {
 		
 		
 		p1.step(Direction.RIGHT);
-		
+		*/
 	}
 }
