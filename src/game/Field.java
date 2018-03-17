@@ -44,6 +44,7 @@ public abstract class Field {
 	
 	
 	
+	@SuppressWarnings("deprecation")
 	public boolean pushHereBy(Player pusher, Thing pushed, Direction dir) {		
 		Logger.enter(this, "pushHereBy(...)" );
 		boolean result = true;
@@ -54,6 +55,7 @@ public abstract class Field {
 			pushed.setLastPusher(pusher);			
 			pushed.setNewField(this);
 		}
+		Logger.exit(this, "pushHereBy(...)", new Boolean(result));
 		return result;
 	}
 	
