@@ -34,17 +34,17 @@ public class TrapDoor extends Floor {
 	}
 	
 	public void open() {
-		//Object[] params = {};
-		//Logger.enter(this, "open",params);
+		Object[] params = {};
+		Logger.enter(this, "open",params);
 		opened = true;
-		Logger.exit(this, "open", null, "");
+		Logger.exit(this, "open", params, "");
 	}
 	
 	public void close() {
-		//Object[] params = {null};
-		//Logger.enter(this, "close",params);
+		Object[] params = {};
+		Logger.enter(this, "close",params);
 		opened = false;
-		Logger.exit(this, "close", null, "");
+		Logger.exit(this, "close", params, "");
 	}
 	
 	public boolean getState() {

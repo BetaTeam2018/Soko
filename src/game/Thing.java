@@ -26,7 +26,11 @@ public abstract class Thing {
 		currentField = f;
 	}
 	public void setLastPusher(Player p) {
+		Object[] params = {p};
+		Logger.enter(this, "setLastPusher", params);
 		lastPusher = p;
+		Logger.exit(this, "setLastPusher", params, "");
+		
 	}
 	
 	public void die() {

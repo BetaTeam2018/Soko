@@ -14,17 +14,18 @@ public class StoreageArea extends Floor {
 	public StoreageArea()
 	{
 		super();
-		pointValue=0;
+		//pointValue=0;
 	}
 	
 	public void set(Box b) {
 		super.set(b);
 		b.getLastPusher().addPoints(pointValue);
-		
 	}
 	
 	public void remove(Box b) {
 		super.remove(b);
 		b.getLastPusher().addPoints(pointValue);
+
+		
 	}
 }

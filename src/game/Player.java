@@ -24,7 +24,7 @@ public class Player extends Thing {
 		Logger.enter(this, "step", params);
 		Field f = this.getCurrentField();
 		Field f2 = f.getNeighbor(dir);		
-		f2.pushHereBy(null, this, dir);
+		f2.pushHereBy(this, this, dir);//átírtam az elso paraméter this-re @csiki100
 		Logger.exit(this, "step", params, "");
 	}
 	
