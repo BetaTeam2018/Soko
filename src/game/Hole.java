@@ -6,6 +6,9 @@
 */
 
 package game;
+
+import logger.Logger;
+
 public class Hole extends Floor {	
 	
 	/**
@@ -26,7 +29,10 @@ public class Hole extends Floor {
 	 */
 	@Override
 	public void set(Player p) {
-		if(p != null) p.die();		
+		Object[] params = {p};
+		Logger.enter(this, "set", params);
+		if(p != null) p.die();	
+		Logger.exit(this, "set", params, "");
 	}
 	
 }

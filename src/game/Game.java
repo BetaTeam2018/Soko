@@ -41,7 +41,29 @@ public class Game  {
 				System.out.println("1st test end \n \n");
 				break;
 			case 2: 
-				// TODO: call test-functions
+				System.out.println("2nd test is running...");
+				this.testWareHouse.workerStepsToHoleTest();
+				System.out.println("2nd test end \n \n");
+				break;
+			case 3: 
+				System.out.println("3rd test is running...");
+				this.testWareHouse.workerStepsToTrapDoorTest();
+				System.out.println("3rd test end \n \n");
+				break;
+			case 4: 
+				System.out.println("4th test is running...");
+				this.testWareHouse.workerStepsToStoreageArea();
+				System.out.println("4th test end");
+				break;
+			case 5: 
+				System.out.println("5th test is running...");
+				this.testWareHouse.workerStepsToSwitch();
+				System.out.println("5th test end");
+				break;
+			case 6: 
+				System.out.println("6th test is running...");
+				this.testWareHouse.workerStepsToTrapDoorTest();
+				System.out.println("6th test end");
 				break;
 			
 			//Ferenc9 begin	

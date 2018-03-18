@@ -26,11 +26,14 @@ public class TrapDoor extends Floor {
 	}
 	
 	public void set(Player p) {
+		Object[] params = {p};
+		Logger.enter(this, "set", params);
 		if(opened) {
 			p.die();
 		}else {
 			super.set(p);
 		}
+		Logger.exit(this, "set", params, "");
 	}
 	
 	public void open() {
@@ -49,5 +52,9 @@ public class TrapDoor extends Floor {
 	
 	public boolean getState() {
 		return opened;
+	}
+	
+	public void setState(boolean opened) {
+		this.opened = opened;
 	}
 }

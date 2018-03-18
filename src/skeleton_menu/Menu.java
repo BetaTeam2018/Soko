@@ -11,12 +11,12 @@ public class Menu {
 		// @kristofgyori begin
 		menuList = new ArrayList<String>();
 		menuList.add("Kilépés a Szkeletonból");
-		menuList.add("A játékos üres mezõre lépjen!");
-		menuList.add("A játékos lyukra lépjen!");
-		menuList.add("A játékos csapóajtóra lépjen!");
-		menuList.add("A játékos célhelyre lépjen");
-		menuList.add("A játékos kapcsolómezõre lépjen!");
-		menuList.add("A játékos menjen neki a falnak!");
+		menuList.add("A játékos üres mezõre lépjen!");		// ok
+		menuList.add("A játékos lyukra lépjen!");			// ok 
+		menuList.add("A játékos csapóajtóra lépjen!");		// ok
+		menuList.add("A játékos célhelyre lépjen");			// ok 
+		menuList.add("A játékos kapcsolómezõre lépjen!");	// ok	
+		menuList.add("A játékos menjen neki a falnak!");	// ok
 		// @ kristofgyori end
 		
 		//@Ferenc9 begin
@@ -26,6 +26,7 @@ public class Menu {
 		menuList.add("A láda lyukra tolódik.");
 		menuList.add("A játékos egy ládát tol"); // number 11
 		//Ferenc9 end
+		
 		//@csiki100 begin
 		menuList.add("A láda célhelyre kerül");
 		menuList.add("A láda kapcsolóra kerül");
@@ -52,7 +53,7 @@ public class Menu {
 	}
 	
 	public static void notFoundListNumErrorMessage() {
-		System.out.println("Error: Érvénytelen sorszám! \n");
+		System.err.println("Error: Érvénytelen sorszám! \n");
 	}
 	
 }
