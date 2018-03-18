@@ -11,27 +11,145 @@ public class TestWareHouse {
 	public TestWareHouse(Game g) {
 		this.game = g;
 	}
-	
-	public void workerStepsToFloorTest() {
-		
+	public String askStepable(String str) {
+		System.out.println(str);			
+		Scanner sc = new Scanner(System.in);
+		String res = sc.nextLine();
+		return res;
+	}
+	public void workerStepsToFloorTest() {		
 		Field f1 = new Floor();
 		Field f2 = new Floor();
 		Player p = new Player(game);
 		
-		Logger.putLogData(p, "[p: Player]");
+		Logger.putLogData(p,  "[p: Player]");
 		Logger.putLogData(f1, "[f1: Floor]");
 		Logger.putLogData(f2, "[f2: Floor]");
-	//	Logger.putLogData(Direction.RIGHT, "dir");
+
 		f1.setNeighbor(Direction.RIGHT, f2);
 		f2.setNeighbor(Direction.LEFT, f1);
 		f1.set(p);
 		p.setField(f1);
 		
+		p.step(Direction.RIGHT);				
+	}
+	
+	public void workerStepsToHoleTest() { 		
+		// Pálya inicializálása 
+		Field f = new Floor();
+		Field hole = new Hole();
+		Player p = new Player(game);
+		
+		// Logger map feltöltése 
+		Logger.putLogData(p, "[p: Player]");
+		Logger.putLogData(f, "[f1: Floor");
+		Logger.putLogData(hole, "[hole: Hole]");
+		
+		// Szomszéd mezõk inicializálása 
+		f.setNeighbor(Direction.RIGHT, hole);
+		hole.setNeighbor(Direction.LEFT, f);
+		
+		// A játékos a kezdõ mezeje (f) 
+		f.set(p);
+		p.setField(f);
+		
+		// A játékos lép
 		p.step(Direction.RIGHT);
-				
+	}
+	
+	public void  workerStepsToTrapDoorTest() {
+		// Pálya init
+		Field f = new Floor();
+		TrapDoor td = new TrapDoor();
+		Player p = new Player(game);
+		
+		// Logger map feltöltése 
+		Logger.putLogData(p, "[p: Player]");
+		Logger.putLogData(f, "[f1: Floor");
+		Logger.putLogData(td, "[trapDoor: TrapDoor]");
+		
+		// Szomszéd mezõk init 
+		f.setNeighbor(Direction.RIGHT, td);
+		td.setNeighbor(Direction.LEFT, f);
+		
+		// A játékos a kezdõ mezeje (f) 
+		f.set(p);
+		p.setField(f);
+		
+		// Nyitott-e a trapDoor? 
+		String ans = this.askStepable("Nyitott a csapóajtó?");
+		if (ans.equals("I")) {
+			td.setState(true);
+		} else if (ans.equals("N")) {
+			td.setState(false);
+		} else {
+			System.out.println("Érvénytelen bevitel! Próbálja újra!");
+			return;
+		}
+		// A játékos lép 
+		p.step(Direction.RIGHT);	
+	}
+	
+	public void workerStepsToStoreageArea() {
+		Field f = new Floor(); 
+		StoreageArea sa = new StoreageArea(); 
+		Player p = new Player(game); 
+	
+		// Logger map feltöltése;
+		Logger.putLogData(p, "[p: Player]");
+		Logger.putLogData(f, "[f1: Floor");
+		Logger.putLogData(sa, "[f2: StoreageArea]");
+		
+		// Szomszéd mezõk init;
+		f.setNeighbor(Direction.RIGHT, sa);
+		sa.setNeighbor(Direction.LEFT, f);
+		
+		// A játékos a kezdõ mezeje (f);
+		f.set(p);
+		p.setField(f);
+		
+		// A játékos lépked;
+		p.step(Direction.RIGHT);
+	}
+	
+	public void workerStepsToSwitch() {
+		Field f = new Floor();
+		Player p = new Player(game);
+		
+		TrapDoor td = new TrapDoor();
+		Switch s = new Switch(td);
+		
+		Logger.putLogData(f, "[f: Floor]");
+		Logger.putLogData(td, "[td: TrapDoor]");
+		Logger.putLogData(s, "[s: Switch]");
+		Logger.putLogData(p, "[p: Player]");
+		
+		f.setNeighbor(Direction.RIGHT, td);
+		td.setNeighbor(Direction.LEFT, f);
+		f.set(p);
+		p.setField(f);
+		p.step(Direction.RIGHT);
+	}
+	
+	public void workerHitTheWall() {
+		Field f = new Floor();
+		Wall wall = new Wall();
+		Player p = new Player(game);
+		Logger.putLogData(f, "[f: Floor]");
+		Logger.putLogData(wall, "[wall: Wall]");
+		
+		f.setNeighbor(Direction.RIGHT, wall);
+		wall.setNeighbor(Direction.LEFT, f);
+
+		f.set(p);
+		p.setField(f);
+		
+		p.step(Direction.RIGHT);
 	}
 	
 	//TODO: test-functions implementation
+	
+	
 	
 //@Ferenc9 begin
 	//Test case 7.
@@ -91,10 +209,10 @@ public class TestWareHouse {
 			if(res.equals("I")) {
 				f3 = new Floor();
 				Logger.putLogData(f3, "[f3: Floor]");
-			}else if(res.equals("N")){
+			} else if(res.equals("N")){
 				f3 = new Wall();
 				Logger.putLogData(f3, "[f3: Wall]");
-			}else {
+			} else {
 				fail = true;
 			}
 		}while(fail);

@@ -75,9 +75,11 @@ public abstract class Field {
 	}
 	
 	public void set(Player p) {
+		Object[] params = {p};
+		Logger.enter(this, "set", params);
 		if(thing != null)
-			System.err.println("Shit happens"); // TODO exception
-		
+			System.err.println("Error: thing is not null"); // TODO exception
+		Logger.exit(this, "set", params, "");
 		thing = p; //Bermuda triangle LOL		
 	}
 	
