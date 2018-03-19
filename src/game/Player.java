@@ -24,7 +24,7 @@ public class Player extends Thing {
 		Logger.enter(this, "step", params);
 		Field f = this.getCurrentField();
 		Field f2 = f.getNeighbor(dir);		
-		f2.pushHereBy(this, this, dir);//átírtam az elso paraméter this-re @csiki100
+		f2.pushHereBy(this, this, dir);//Ã¡tÃ­rtam az elso paramÃ©ter this-re @csiki100
 		Logger.exit(this, "step", params, "");
 	}
 	
@@ -63,8 +63,11 @@ public class Player extends Thing {
 	public void setNewField(Field newField) {
 		Object[] params = {newField};
 		Logger.enter(this, "setNewField",  params);
-		this.getCurrentField().remove(this);
-		newField.set(this);
+		
+		this.getCurrentField().remove(this); 	// Töröljük az ide mutató referenciát a jelenlegi field-rol.
+		this.setField(newField);				// Új field beállítása.
+		newField.set(this);						// A játékos bekötéseaz új field-re.
+		
 		Logger.exit(this, "setNewField", params, "");
 	}
 }

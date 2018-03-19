@@ -49,11 +49,14 @@ public abstract class Field {
 	public boolean pushHereBy(Player pusher, Thing pushed, Direction dir) {		
 		Object[] params = {pusher, pushed, dir};
 		Logger.enter(this, "pushHereBy", params);
+		
 		boolean result = true;
 		
 		if(this.getThing() != null) {
 			 result = this.getThing().slideBy(pusher, dir);
-		}else if(result == true) {			
+		}
+		
+		if(result == true) {			
 			pushed.setLastPusher(pusher);			
 			pushed.setNewField(this);
 		}
