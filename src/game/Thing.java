@@ -14,7 +14,6 @@ public abstract class Thing {
 	private Player lastPusher;
 	private Field currentField;
 	
-	
 	public boolean slideBy(Player pusher, Direction dir) {		
 		return this.getCurrentField().
 				getNeighbor(dir).
@@ -22,6 +21,7 @@ public abstract class Thing {
 	}
 	
 	public abstract void setNewField(Field newField);
+	
 	public void setField(Field f) {
 		currentField = f;
 	}

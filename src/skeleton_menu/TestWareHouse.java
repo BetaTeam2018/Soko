@@ -5,530 +5,552 @@ import game.*;
 import logger.Logger;
 
 public class TestWareHouse {
-	// private List<Field> fields = new ArrayList<Field>();
-	private Game game;
-	
-	public TestWareHouse(Game g) {
-		this.game = g;
-	}
-	public String askStepable(String str) {
-		System.out.println(str);			
-		Scanner sc = new Scanner(System.in);
-		String res = sc.nextLine();
-		return res;
-	}
-	public void workerStepsToFloorTest() {		
-		Field f1 = new Floor();
-		Field f2 = new Floor();
-		Player p = new Player(game);
-		
-		Logger.putLogData(p,  "[p: Player]");
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: Floor]");
 
-		f1.setNeighbor(Direction.RIGHT, f2);
-		f2.setNeighbor(Direction.LEFT, f1);
-		f1.set(p);
-		p.setField(f1);
-		
-		p.step(Direction.RIGHT);				
-	}
-	
-	public void workerStepsToHoleTest() { 		
-		// Pálya inicializálása 
-		Field f = new Floor();
-		Field hole = new Hole();
-		Player p = new Player(game);
-		
-		// Logger map feltöltése 
-		Logger.putLogData(p, "[p: Player]");
-		Logger.putLogData(f, "[f1: Floor");
-		Logger.putLogData(hole, "[hole: Hole]");
-		
-		// Szomszéd mezõk inicializálása 
-		f.setNeighbor(Direction.RIGHT, hole);
-		hole.setNeighbor(Direction.LEFT, f);
-		
-		// A játékos a kezdõ mezeje (f) 
-		f.set(p);
-		p.setField(f);
-		
-		// A játékos lép
-		p.step(Direction.RIGHT);
-	}
-	
-	public void  workerStepsToTrapDoorTest() {
-		// Pálya init
-		Field f = new Floor();
-		TrapDoor td = new TrapDoor();
-		Player p = new Player(game);
-		
-		// Logger map feltöltése 
-		Logger.putLogData(p, "[p: Player]");
-		Logger.putLogData(f, "[f1: Floor");
-		Logger.putLogData(td, "[trapDoor: TrapDoor]");
-		
-		// Szomszéd mezõk init 
-		f.setNeighbor(Direction.RIGHT, td);
-		td.setNeighbor(Direction.LEFT, f);
-		
-		// A játékos a kezdõ mezeje (f) 
-		f.set(p);
-		p.setField(f);
-		
-		// Nyitott-e a trapDoor? 
-		String ans = this.askStepable("Nyitott a csapóajtó?");
-		if (ans.equals("I")) {
-			td.setState(true);
-		} else if (ans.equals("N")) {
-			td.setState(false);
-		} else {
-			System.out.println("Érvénytelen bevitel! Próbálja újra!");
-			return;
-		}
-		// A játékos lép 
-		p.step(Direction.RIGHT);	
-	}
-	
-	public void workerStepsToStoreageArea() {
-		Field f = new Floor(); 
-		StoreageArea sa = new StoreageArea(); 
-		Player p = new Player(game); 
-	
-		// Logger map feltöltése;
-		Logger.putLogData(p, "[p: Player]");
-		Logger.putLogData(f, "[f1: Floor");
-		Logger.putLogData(sa, "[f2: StoreageArea]");
-		
-		// Szomszéd mezõk init;
-		f.setNeighbor(Direction.RIGHT, sa);
-		sa.setNeighbor(Direction.LEFT, f);
-		
-		// A játékos a kezdõ mezeje (f);
-		f.set(p);
-		p.setField(f);
-		
-		// A játékos lépked;
-		p.step(Direction.RIGHT);
-	}
-	
-	public void workerStepsToSwitch() {
-		Field f = new Floor();
-		Player p = new Player(game);
-		
-		TrapDoor td = new TrapDoor();
-		Switch s = new Switch(td);
-		
-		Logger.putLogData(f, "[f: Floor]");
-		Logger.putLogData(td, "[td: TrapDoor]");
-		Logger.putLogData(s, "[s: Switch]");
-		Logger.putLogData(p, "[p: Player]");
-		
-		f.setNeighbor(Direction.RIGHT, td);
-		td.setNeighbor(Direction.LEFT, f);
-		f.set(p);
-		p.setField(f);
-		p.step(Direction.RIGHT);
-	}
-	
-	public void workerHitTheWall() {
-		Field f = new Floor();
-		Wall wall = new Wall();
-		Player p = new Player(game);
-		Logger.putLogData(f, "[f: Floor]");
-		Logger.putLogData(wall, "[wall: Wall]");
-		
-		f.setNeighbor(Direction.RIGHT, wall);
-		wall.setNeighbor(Direction.LEFT, f);
+    private Game game;
+    
+    public TestWareHouse(Game g) {
+        this.game = g;
+    }
+    
+    /**
+     * Kiír az outputra egy kérdést, és visszaadja sztringben a választ. 
+     * @param str a kérdés szöveges formája
+     * @return a válasz szöveges formában
+     */
+    private String askStepable(String str) {
+        System.out.println(str);
+        Scanner sc = new Scanner(System.in);
+        String res = sc.nextLine();
+       // sc.close();
+        return res;
+    }
+    
+    /**
+     * Az 1-6. esetnél alkalmas használni. A teszt pályát inicializálja két mezõvel és egy játékossal.
+     * @param f1 a kezdõ mezõ
+     * @param f2 a célmezõ
+     * @param p a játékos
+     */
+    private void initWorkerStepsTestCase(Field f1, Field f2, Player p) {
+    	System.out.println("=== Initialization block ===");
+        f1.setNeighbor(Direction.RIGHT, f2);
+        f2.setNeighbor(Direction.LEFT, f1);
+        f1.set(p);
+        p.setField(f1);
+        System.out.println("============================");
+    }
+    
+    /**
+     * -- Test 1 --  A játékos üres mezõre lépjen!
+     */
+    public void workerStepsToFloorTest() {
+        Field f1 = new Floor();
+        Field f2 = new Floor();
+        Player p = new Player(game);
 
-		f.set(p);
-		p.setField(f);
-		
-		p.step(Direction.RIGHT);
-	}
-	
-	//TODO: test-functions implementation
-	
-	
-	
-//@Ferenc9 begin
-	//Test case 7.
-	public void playerPushesBox() {
-		Field f1 = new Floor(), f2 = new Floor(), f3 = new Floor();		
-				
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: Floor]");
-		
-	
-		boolean fail = false;
-		do {			
-			System.out.println("Tolható a láda? (I/N)");			
-			Scanner sc = new Scanner(System.in);
-			String res = sc.nextLine();
-						
-			if(res.equals("I")) {
-				f3 = new Floor();				
-				Logger.putLogData(f3, "[f3: Floor]");
-			}else if( res.equals("N")){
-				f3 = new Wall();				
-				Logger.putLogData(f3, "[f3: Wall]");
-			}else {
-				fail = true;				
-			}
-		}while(fail);
-		
-		Field.ConnectHorizontal(f1, f2);
-		Field.ConnectHorizontal(f2, f3);
-		
-		
-		Player p = new Player(game);
-		Box b = new Box();
-		Logger.putLogData(p, "[p: Player]");
-		Logger.putLogData(b, "[b: Box]");
-		f1.set(p); p.setField(f1);
-		f2.set(b); b.setField(f2);
-		
-		p.step(Direction.RIGHT);
-		
-	}
-	
-	//Test case 8.
-	public void playerPushesPlayer() {		
-		Field f1 = new Floor(), f2 = new Floor(), f3 = new Floor();		
-				
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: Floor]");
-		
-	
-		boolean fail = false;
-		do {			
-			System.out.println("Tolható a játékos? (I/N)");			
-			Scanner sc = new Scanner(System.in);
-			String res = sc.nextLine();
-			
-			if(res.equals("I")) {
-				f3 = new Floor();
-				Logger.putLogData(f3, "[f3: Floor]");
-			} else if(res.equals("N")){
-				f3 = new Wall();
-				Logger.putLogData(f3, "[f3: Wall]");
-			} else {
-				fail = true;
-			}
-		}while(fail);
-		
-		Field.ConnectHorizontal(f1, f2);
-		Field.ConnectHorizontal(f2, f3);
-		
-		
-		Player p1 = new Player(game);
-		Player p2 = new Player(game);
-		Logger.putLogData(p1, "[p: Player]");
-		Logger.putLogData(p2, "[p: Player]");
-		f1.set(p1); p1.setField(f1);
-		f2.set(p2); p2.setField(f2);
-		
-		p1.step(Direction.RIGHT);
-			
-		
-	}
-	//Test case 9.
-	public void boxStepsToFloor() {
-			
-		Field f1 = new Floor(), f2 = new Floor(), f3 = new Floor(), f4  = new Floor();	
-		
-		
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: Floor]");				
-		Logger.putLogData(f3, "[f3: Floor]");
-		
-		boolean fail = false;
-		do {			
-			System.out.println("Tolható-e a sor? (I/N)");			
-			Scanner sc = new Scanner(System.in);
-			String res = sc.nextLine();
-			
-			if(res.equals("I")) {
-				f4 = new Floor();
-				Logger.putLogData(f4, "[f4: Floor]");
-			}else if(res.equals("N")){
-				f4 = new Wall();
-				Logger.putLogData(f4, "[f4: Wall]");
-			}else {
-				fail = true;
-			}
-		}while(fail);
-		
-		
-		
-		
-				
-		Field.ConnectHorizontal(f1, f2);
-		Field.ConnectHorizontal(f2, f3);
-		Field.ConnectHorizontal(f3, f4);
-				
-		Player p = new Player(game);
-		Box b1 = new Box();
-		Box b2 = new Box();
-		Logger.putLogData(p, "[p: Player]");
-		Logger.putLogData(b1, "[b1: Box]");
-		Logger.putLogData(b2, "[b2: Box]");
-		f1.set(p); p.setField(f1);
-		f2.set(b1); b1.setField(f2);
-		f3.set(b2); b2.setField(f3);
-		
-		p.step(Direction.RIGHT);
-		}
-	
-	//Test case 10.
-	public void boxStepsToHole() {
-		Field f1 = new Floor(), f2 = new Floor(), f3 = new Hole();
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: Floor]");
-		Logger.putLogData(f3, "[f3: Hole]");
-		
-		Field.ConnectHorizontal(f1, f2);
-		Field.ConnectHorizontal(f2, f3);
-		
-		Box b = new Box();
-		Player p = new Player(game);
-		Logger.putLogData(p, "[p: Player]");
-		Logger.putLogData(b, "[b: Box]");
-		p.setField(f1); f1.set(p);
-		b.setField(f2); f2.set(b);
-		
-		p.step(Direction.RIGHT);
-		
-	}
-	
-	//Test case 11.
-	public void boxStepsToTrapdoor() {
-		Field f1 = new Floor(), f2 = new Floor(), f3 = new TrapDoor();
-		
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: Floor]");
-		Logger.putLogData(f3, "[f3: Trapdoor]");
-		
-		Field.ConnectHorizontal(f1, f2);
-		Field.ConnectHorizontal(f2, f3);
-		
-		Box b = new Box();
-		Player p = new Player(game);
-		Logger.putLogData(p, "[p: Player]");
-		Logger.putLogData(b, "[b: Box]");
-		p.setField(f1); f1.set(p);
-		b.setField(f2); f2.set(b);
-		
-		p.step(Direction.RIGHT);
-	}
-//@Ferenc9 end
-	
-//@csiki100 begin
-	//Test case 12
-	public void boxStepsToStorageArea()					//a doboz célhelyre érkezik
-	{
-		Field f1=new Floor();
-		Field f2=new Floor();							//pályaelemek
-		Field f3=new StoreageArea();
-		
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: Floor]");			//pályaelemek beírása a loggerbe
-		Logger.putLogData(f3, "[f3: StorageArea");
-		
-		
-		Field.ConnectHorizontal(f1, f2);				//pályaelemek összekötése
-		Field.ConnectHorizontal(f2, f3);
-		
-		Player p1=new Player(game);						// dolgok a pályán
-		Box b1=new Box();
-		
-		Logger.putLogData(p1, "[p1: Player]");			//dolgok beírása a loggerbe
-		Logger.putLogData(b1, "[b1: Box]");
-		
-		p1.setField(f1);
-		f1.set(p1);									
-														//dolgok lehelyezése a pályára
-		b1.setField(f2);
-		f2.set(b1);
-		
-		p1.step(Direction.RIGHT);
-	}
-	//Test case 13
-	public void boxStepsToSwitch()						//doboz kapcsolóra érkezik
-	{
-		Field f1=new Floor();
-		Field f2=new Floor();							//pályaelemek
-		Field f3=new TrapDoor();
-		Field f4=new Switch((TrapDoor) f3);
-		
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: Floor]");
-		Logger.putLogData(f3, "[f3: TrapDoor]");		//pályaelemek beírása a loggerbe
-		Logger.putLogData(f4, "[f4: Switch]");
-		
-		Player p1=new Player(game);						// dolgok a pályán
-		Box b1=new Box();
-		
-		Logger.putLogData(b1, "[b1: Box]");
-		Logger.putLogData(p1, "[p1: Player]");			//dolgok beírása a loggerbe
-		
-		f1.set(p1);
-		p1.setField(f1);
-														//dolgok lehelyezése a pályára
-		f2.set(b1);
-		b1.setField(f2);
-		
-		Field.ConnectHorizontal(f1, f2);
-		Field.ConnectHorizontal(f2, f4);				//pályaelemek összekötése
-		Field.ConnectHorizontal(f4, f3);
-		
-		p1.step(Direction.RIGHT);
-	}
-	//Test case 14
-	public void boxStepsToWall()						//doboz falnak megy
-	{
-		Field f1=new Floor();
-		Field f2=new Floor();							//pályaelemek
-		Field f3=new Wall();
-		
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: Floor]");			//pályaelemek beírása a loggerbe
-		Logger.putLogData(f3, "[f3: Wall]");
-		
-		Floor.ConnectHorizontal(f1, f2);
-		Floor.ConnectHorizontal(f2, f3);				//pályaelemek összekötése
-		
-		Player p1=new Player(game);						// dolgok a pályán
-		Box b1=new Box();
-		
-		Logger.putLogData(p1, "[p1: Player]");			//dolgok beírása a loggerbe
-		Logger.putLogData(b1, "[b1: Box]");
-		
-		p1.setField(f1);
-		f1.set(p1);
-														//dolgok lehelyezése a pályára
-		b1.setField(f2);
-		f2.set(b1);
-		
-		p1.step(Direction.RIGHT);
-		
-		
-		
-	}
-	//Test case 16
-	public void boxStepstoPlayer()						//doboz Playernek megy
+        Logger.putLogData(p, "[p: Player]");
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: Floor]");
 
-	{
-		Field f1=new Floor();
-		Field f2=new Floor();								//pályaelemek
-		Field f3=new Floor();
-		Field f4=null;
-		
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: Floor]");				//pályaelemek beírása a loggerbe
-		Logger.putLogData(f3, "[f3: Floor]");
-		
-		System.out.println("Tolható a játékos? (I/N)");			
-		Scanner sc = new Scanner(System.in);
-		String res = sc.nextLine();
-					
-			if(res.equals("I"))								//utolsó pályaelem a választól függoen
-				{
-					f4 = new Floor();
-					Logger.putLogData(f4, "[f4: Floor]");
-				}
-			else if(res.equals("N"))
-				{
-					f4 = new Wall();
-					Logger.putLogData(f4, "[f4: Wall]");
-				}
-		
-		Floor.ConnectHorizontal(f1, f2);
-		Floor.ConnectHorizontal(f2, f3);					//pályaelemek összekötése
-		Floor.ConnectHorizontal(f3, f4);
-		
-		Player p1=new Player(game);
-		Player p2=new Player(game);							// dolgok a pályán
-		Box b1=new Box();
-		
-		Logger.putLogData(p1, "[p1: Player]");				
-		Logger.putLogData(p2, "[p2: Player]");				//dolgok beírása a loggerbe
-		Logger.putLogData(b1, "[b1: Box]");
-		
-		
-		p1.setField(f1);
-		f1.set(p1);
-		
-		b1.setField(f2);									//dolgok lehelyezése a pályára
-		f2.set(b1);
-		
-		p2.setField(f3);
-		f3.set(p2);
-		
-		p1.step(Direction.RIGHT);
-		
-	}
-	//Test case 17
-	public void boxStepsFromSwitch()					//doboz lelép a Switchrol
+        initWorkerStepsTestCase(f1, f2, p);
+        p.step(Direction.RIGHT);
+    }
 
-	{
-		Field f1=new Floor();
-		Field f2=new TrapDoor();
-		Field f3=new Switch((TrapDoor)f2);							//pályaelemek
-		Field f4=new Floor();
-		
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: TrapDoor");
-		Logger.putLogData(f3, "[f3: Switch]");						//pályaelemek beírása a loggerbe
-		Logger.putLogData(f4, "[f4:Floor]");
-		
-		Field.ConnectHorizontal(f1, f3);							//pályaelemek összekötése
-		Field.ConnectHorizontal(f3, f4);
-		
-		Player p1=new Player(game);									// dolgok a pályán
-		Box b1=new Box();
-		
-		Logger.putLogData(p1, "[p1: Player]");						//dolgok beírása a loggerbe
-		Logger.putLogData(b1, "[b1: Box]");
-		
-		f1.set(p1);
-		p1.setField(f1);
-																	//dolgok lehelyezése a pályára
-		f3.set(b1);
-		b1.setField(f3);
-		
-		p1.step(Direction.RIGHT);
-		
-	}
-	//Test case 18
-	public void boxStepsFromStorageArea()				//doboz lelép a célhelyrol
-	{
-		Field f1=new Floor();
-		Field f2=new StoreageArea();								//pályaelemek
-		Field f3=new Floor();
-		
-		Logger.putLogData(f1, "[f1: Floor]");
-		Logger.putLogData(f2, "[f2: StorageArea");					//pályaelemek beírása a loggerbe
-		Logger.putLogData(f3, "[f3: Floor]");
-		
-		Field.ConnectHorizontal(f1, f2);							//pályaelemek összekötése
-		Field.ConnectHorizontal(f2, f3);
-		
-		Player p1=new Player(game);									// dolgok a pályán
-		Box b1=new Box();
-		
-		Logger.putLogData(p1, "[p1: Player]");						//dolgok beírása a loggerbe
-		Logger.putLogData(b1, "[b1: Box]");
-		
-		p1.setField(f1);
-		f1.set(p1);
-		
-		b1.setField(f2);											//dolgok lehelyezése a pályára
-		b1.setLastPusher(p1);
-		f2.set(b1);
-		
-		p1.step(Direction.RIGHT);
-		
-	}
-	//@csiki100 end
+
+    /**
+     * -- Test 2 -- A játékos lyukra lépjen!
+     */
+    public void workerStepsToHoleTest() {
+        // Pálya inicializálása 
+        Field f = new Floor();
+        Field hole = new Hole();
+        Player p = new Player(game);
+
+        // Logger map feltöltése 
+        Logger.putLogData(p, "[p: Player]");
+        Logger.putLogData(f, "[f1: Floor");
+        Logger.putLogData(hole, "[hole: Hole]");
+
+        // Szomszéd mezõk inicializálása 
+        initWorkerStepsTestCase(f, hole, p);
+
+        // A játékos lép
+        p.step(Direction.RIGHT);
+    }
+
+    /** -- Test 3 --  A játékos csapóajtóra lépjen 
+     */
+    public void workerStepsToTrapDoorTest() {
+        // Pálya init
+        Field f = new Floor();
+        TrapDoor td = new TrapDoor();
+        Player p = new Player(game);
+
+        // Logger map feltöltése 
+        Logger.putLogData(p, "[p: Player]");
+        Logger.putLogData(f, "[f1: Floor]");
+        Logger.putLogData(td, "[trapDoor: TrapDoor]");
+      
+        // Szomszéd mezõk: init 
+        initWorkerStepsTestCase(f, td, p);
+        
+        // Nyitott-e a trapDoor? 
+        String ans = this.askStepable("Nyitott a csapóajtó? (I/N)");
+        if (ans.equals("I")) {
+            td.setState(true);
+        } else if (ans.equals("N")) {
+            td.setState(false);
+        } else {
+            System.out.println("Érvénytelen bevitel! Próbálja újra!");
+            return;
+        }
+        
+        // A játékos lép 
+        p.step(Direction.RIGHT);
+    }
+
+    /**
+     * -- Test 4 --  A játékos célhelyre lépjen
+     */
+    public void workerStepsToStoreageArea() {
+        Field f = new Floor();
+        StoreageArea sa = new StoreageArea();
+        Player p = new Player(game);
+
+        // Logger map feltöltése;
+        Logger.putLogData(p, "[p: Player]");
+        Logger.putLogData(f, "[f1: Floor]");
+        Logger.putLogData(sa, "[f2: StoreageArea]");
+
+        // Szomszéd mezõk: init 
+        initWorkerStepsTestCase(f, sa, p);
+
+        // A játékos lépked;
+        p.step(Direction.RIGHT);
+    }
+
+    /**
+     * -- Test 5 -- A játékos kapcsolómezõre lépjen!
+     */
+    public void workerStepsToSwitch() {
+        Field f = new Floor();
+        Player p = new Player(game);
+
+        TrapDoor td = new TrapDoor();
+        Switch s = new Switch(td);
+
+        Logger.putLogData(f, "[f: Floor]");
+        Logger.putLogData(td, "[td: TrapDoor]");
+        Logger.putLogData(s, "[s: Switch]");
+        Logger.putLogData(p, "[p: Player]");
+      
+        // Szomszéd mezõk: init 
+        initWorkerStepsTestCase(f, s, p);
+      
+        p.step(Direction.RIGHT);
+    }
+
+    /**
+     * -- Test 6 -- A játékos menjen neki a falnak!
+     */
+    public void workerHitTheWall() {
+        Field f = new Floor();
+        Wall wall = new Wall();
+        Player p = new Player(game);
+        Logger.putLogData(f, "[f: Floor]");
+        Logger.putLogData(wall, "[wall: Wall]");
+        Logger.putLogData(p, "[p: Player]");
+        
+        // Szomszéd mezõk: init 
+        initWorkerStepsTestCase(f, wall, p);
+   
+        p.step(Direction.RIGHT);
+    }
+
+    //@Ferenc9 begin
+    //Test case 7.
+    public void playerPushesBox() {
+        Field f1 = new Floor(), f2 = new Floor(), f3 = new Floor();
+
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: Floor]");
+        
+
+
+        boolean fail = false;
+        do {
+            System.out.println("Tolható a láda? (I/N)");
+            Scanner sc = new Scanner(System.in);
+            String res = sc.nextLine();
+           // sc.close();
+            if (res.equals("I")) {
+                f3 = new Floor();
+                Logger.putLogData(f3, "[f3: Floor]");
+            } else if (res.equals("N")) {
+                f3 = new Wall();
+                Logger.putLogData(f3, "[f3: Wall]");
+            } else {
+                fail = true;
+            }
+        } while (fail);
+
+        Field.ConnectHorizontal(f1, f2);
+        Field.ConnectHorizontal(f2, f3);
+
+
+        Player p = new Player(game);
+        Box b = new Box();
+        Logger.putLogData(p, "[p: Player]");
+        Logger.putLogData(b, "[b: Box]");
+        f1.set(p);
+        p.setField(f1);
+        f2.set(b);
+        b.setField(f2);
+
+        p.step(Direction.RIGHT);
+
+    }
+
+    //Test case 8.
+    public void playerPushesPlayer() {
+        Field f1 = new Floor(), f2 = new Floor(), f3 = new Floor();
+
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: Floor]");
+
+
+        boolean fail = false;
+        do {
+            System.out.println("Tolható a játékos? (I/N)");
+            Scanner sc = new Scanner(System.in);
+            String res = sc.nextLine();
+            sc.close();
+            if (res.equals("I")) {
+                f3 = new Floor();
+                Logger.putLogData(f3, "[f3: Floor]");
+            } else if (res.equals("N")) {
+                f3 = new Wall();
+                Logger.putLogData(f3, "[f3: Wall]");
+            } else {
+                fail = true;
+            }
+        } while (fail);
+
+        Field.ConnectHorizontal(f1, f2);
+        Field.ConnectHorizontal(f2, f3);
+
+
+        Player p1 = new Player(game);
+        Player p2 = new Player(game);
+        Logger.putLogData(p1, "[p: Player]");
+        Logger.putLogData(p2, "[p: Player]");
+        f1.set(p1);
+        p1.setField(f1);
+        f2.set(p2);
+        p2.setField(f2);
+
+        p1.step(Direction.RIGHT);
+
+
+    }
+    //Test case 9.
+    public void boxStepsToFloor() {
+
+        Field f1 = new Floor(), f2 = new Floor(), f3 = new Floor(), f4 = new Floor();
+
+
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: Floor]");
+        Logger.putLogData(f3, "[f3: Floor]");
+
+        boolean fail = false;
+        do {
+            System.out.println("Tolható-e a sor? (I/N)");
+            Scanner sc = new Scanner(System.in);
+            String res = sc.nextLine();
+           // sc.close();
+            if (res.equals("I")) {
+                f4 = new Floor();
+                Logger.putLogData(f4, "[f4: Floor]");
+            } else if (res.equals("N")) {
+                f4 = new Wall();
+                Logger.putLogData(f4, "[f4: Wall]");
+            } else {
+                fail = true;
+            }
+        } while (fail);
+
+        Field.ConnectHorizontal(f1, f2);
+        Field.ConnectHorizontal(f2, f3);
+        Field.ConnectHorizontal(f3, f4);
+
+        Player p = new Player(game);
+        Box b1 = new Box();
+        Box b2 = new Box();
+        Logger.putLogData(p, "[p: Player]");
+        Logger.putLogData(b1, "[b1: Box]");
+        Logger.putLogData(b2, "[b2: Box]");
+        f1.set(p);
+        p.setField(f1);
+        f2.set(b1);
+        b1.setField(f2);
+        f3.set(b2);
+        b2.setField(f3);
+
+        p.step(Direction.RIGHT);
+    }
+
+    //Test case 10.
+    public void boxStepsToHole() {
+        Field f1 = new Floor(), f2 = new Floor(), f3 = new Hole();
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: Floor]");
+        Logger.putLogData(f3, "[f3: Hole]");
+
+        Field.ConnectHorizontal(f1, f2);
+        Field.ConnectHorizontal(f2, f3);
+
+        Box b = new Box();
+        Player p = new Player(game);
+        Logger.putLogData(p, "[p: Player]");
+        Logger.putLogData(b, "[b: Box]");
+        p.setField(f1);
+        f1.set(p);
+        b.setField(f2);
+        f2.set(b);
+
+        p.step(Direction.RIGHT);
+
+    }
+
+    //Test case 11.
+    public void boxStepsToTrapdoor() {
+        Field f1 = new Floor(), f2 = new Floor(), f3 = new TrapDoor();
+
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: Floor]");
+        Logger.putLogData(f3, "[f3: Trapdoor]");
+
+        Field.ConnectHorizontal(f1, f2);
+        Field.ConnectHorizontal(f2, f3);
+
+        Box b = new Box();
+        Player p = new Player(game);
+        Logger.putLogData(p, "[p: Player]");
+        Logger.putLogData(b, "[b: Box]");
+        p.setField(f1);
+        f1.set(p);
+        b.setField(f2);
+        f2.set(b);
+
+        p.step(Direction.RIGHT);
+    }
+    //@Ferenc9 end
+
+    //@csiki100 begin
+    //Test case 12
+    public void boxStepsToStorageArea() //a doboz célhelyre érkezik
+    {
+        Field f1 = new Floor();
+        Field f2 = new Floor(); //pályaelemek
+        Field f3 = new StoreageArea();
+
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: Floor]"); //pályaelemek beírása a loggerbe
+        Logger.putLogData(f3, "[f3: StorageArea");
+
+
+        Field.ConnectHorizontal(f1, f2); //pályaelemek összekötése
+        Field.ConnectHorizontal(f2, f3);
+
+        Player p1 = new Player(game); // dolgok a pályán
+        Box b1 = new Box();
+
+        Logger.putLogData(p1, "[p1: Player]"); //dolgok beírása a loggerbe
+        Logger.putLogData(b1, "[b1: Box]");
+
+        p1.setField(f1);
+        f1.set(p1);
+        //dolgok lehelyezése a pályára
+        b1.setField(f2);
+        f2.set(b1);
+
+        p1.step(Direction.RIGHT);
+    }
+    //Test case 13
+    public void boxStepsToSwitch() //doboz kapcsolóra érkezik
+    {
+        Field f1 = new Floor();
+        Field f2 = new Floor(); //pályaelemek
+        Field f3 = new TrapDoor();
+        Field f4 = new Switch((TrapDoor) f3);
+
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: Floor]");
+        Logger.putLogData(f3, "[f3: TrapDoor]"); //pályaelemek beírása a loggerbe
+        Logger.putLogData(f4, "[f4: Switch]");
+
+        Player p1 = new Player(game); // dolgok a pályán
+        Box b1 = new Box();
+
+        Logger.putLogData(b1, "[b1: Box]");
+        Logger.putLogData(p1, "[p1: Player]"); //dolgok beírása a loggerbe
+
+        f1.set(p1);
+        p1.setField(f1);
+        //dolgok lehelyezése a pályára
+        f2.set(b1);
+        b1.setField(f2);
+
+        Field.ConnectHorizontal(f1, f2);
+        Field.ConnectHorizontal(f2, f4); //pályaelemek összekötése
+        Field.ConnectHorizontal(f4, f3);
+
+        p1.step(Direction.RIGHT);
+    }
+    //Test case 14
+    public void boxStepsToWall() //doboz falnak megy
+    {
+        Field f1 = new Floor();
+        Field f2 = new Floor(); //pályaelemek
+        Field f3 = new Wall();
+
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: Floor]"); //pályaelemek beírása a loggerbe
+        Logger.putLogData(f3, "[f3: Wall]");
+
+        Floor.ConnectHorizontal(f1, f2);
+        Floor.ConnectHorizontal(f2, f3); //pályaelemek összekötése
+
+        Player p1 = new Player(game); // dolgok a pályán
+        Box b1 = new Box();
+
+        Logger.putLogData(p1, "[p1: Player]"); //dolgok beírása a loggerbe
+        Logger.putLogData(b1, "[b1: Box]");
+
+        p1.setField(f1);
+        f1.set(p1);
+        //dolgok lehelyezése a pályára
+        b1.setField(f2);
+        f2.set(b1);
+
+        p1.step(Direction.RIGHT);
+
+
+
+    }
+    //Test case 16
+    public void boxStepstoPlayer() //doboz Playernek megy
+
+    {
+        Field f1 = new Floor();
+        Field f2 = new Floor(); //pályaelemek
+        Field f3 = new Floor();
+        Field f4 = null;
+
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: Floor]"); //pályaelemek beírása a loggerbe
+        Logger.putLogData(f3, "[f3: Floor]");
+
+        System.out.println("Tolható a játékos? (I/N)");
+        Scanner sc = new Scanner(System.in);
+        String res = sc.nextLine();
+       // sc.close();
+        if (res.equals("I")) //utolsó pályaelem a választól függoen
+        {
+            f4 = new Floor();
+            Logger.putLogData(f4, "[f4: Floor]");
+        } else if (res.equals("N")) {
+            f4 = new Wall();
+            Logger.putLogData(f4, "[f4: Wall]");
+        }
+
+        Floor.ConnectHorizontal(f1, f2);
+        Floor.ConnectHorizontal(f2, f3); //pályaelemek összekötése
+        Floor.ConnectHorizontal(f3, f4);
+
+        Player p1 = new Player(game);
+        Player p2 = new Player(game); // dolgok a pályán
+        Box b1 = new Box();
+
+        Logger.putLogData(p1, "[p1: Player]");
+        Logger.putLogData(p2, "[p2: Player]"); //dolgok beírása a loggerbe
+        Logger.putLogData(b1, "[b1: Box]");
+
+
+        p1.setField(f1);
+        f1.set(p1);
+
+        b1.setField(f2); //dolgok lehelyezése a pályára
+        f2.set(b1);
+
+        p2.setField(f3);
+        f3.set(p2);
+
+        p1.step(Direction.RIGHT);
+
+    }
+    //Test case 17
+    public void boxStepsFromSwitch() //doboz lelép a Switchrol
+
+    {
+        Field f1 = new Floor();
+        Field f2 = new TrapDoor();
+        Field f3 = new Switch((TrapDoor) f2); //pályaelemek
+        Field f4 = new Floor();
+
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: TrapDoor");
+        Logger.putLogData(f3, "[f3: Switch]"); //pályaelemek beírása a loggerbe
+        Logger.putLogData(f4, "[f4:Floor]");
+
+        Field.ConnectHorizontal(f1, f3); //pályaelemek összekötése
+        Field.ConnectHorizontal(f3, f4);
+
+        Player p1 = new Player(game); // dolgok a pályán
+        Box b1 = new Box();
+
+        Logger.putLogData(p1, "[p1: Player]"); //dolgok beírása a loggerbe
+        Logger.putLogData(b1, "[b1: Box]");
+
+        f1.set(p1);
+        p1.setField(f1);
+        //dolgok lehelyezése a pályára
+        f3.set(b1);
+        b1.setField(f3);
+
+        p1.step(Direction.RIGHT);
+
+    }
+    //Test case 18
+    public void boxStepsFromStorageArea() //doboz lelép a célhelyrol
+    {
+        Field f1 = new Floor();
+        Field f2 = new StoreageArea(); //pályaelemek
+        Field f3 = new Floor();
+
+        Logger.putLogData(f1, "[f1: Floor]");
+        Logger.putLogData(f2, "[f2: StorageArea"); //pályaelemek beírása a loggerbe
+        Logger.putLogData(f3, "[f3: Floor]");
+
+        Field.ConnectHorizontal(f1, f2); //pályaelemek összekötése
+        Field.ConnectHorizontal(f2, f3);
+
+        Player p1 = new Player(game); // dolgok a pályán
+        Box b1 = new Box();
+
+        Logger.putLogData(p1, "[p1: Player]"); //dolgok beírása a loggerbe
+        Logger.putLogData(b1, "[b1: Box]");
+
+        p1.setField(f1);
+        f1.set(p1);
+
+        b1.setField(f2); //dolgok lehelyezése a pályára
+        b1.setLastPusher(p1);
+        f2.set(b1);
+
+        p1.step(Direction.RIGHT);
+
+    }
+    //@csiki100 end
 }

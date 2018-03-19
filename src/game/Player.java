@@ -45,7 +45,7 @@ public class Player extends Thing {
 	public void die() {
 		Object[] params = {};
 		Logger.enter(this, "die", params);
-		this.getCurrentField().set((Player)null);
+		// this.getCurrentField().set((Player)null);
 		super.die();
 		game.endGame();
 		Logger.exit(this, "die", params, "");
